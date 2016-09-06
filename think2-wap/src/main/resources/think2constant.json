@@ -1,0 +1,50 @@
+[
+  {
+    "name": "vehicle",
+    "display": "车辆违章类型",
+    "group": "illegalType",
+    "value": "1"
+  },
+  {
+    "name": "driving",
+    "display": "驾驶证违章类型",
+    "group": "illegalType",
+    "value": "2"
+  },
+  {
+    "name": "vehicle",
+    "display": "车辆违章查询接口地址",
+    "group": "illegalUrl",
+    "value": "http://dp2.sz96296.com:8075/cms/externalinterfaces/getExternalData?interfaceCode=003"
+  },
+  {
+    "name": "pic",
+    "display": "违章图片地址",
+    "group": "illegalUrl",
+    "value": "http://dp2.sz96296.com:8075/traffic/punish?xh="
+  },
+  {
+    "name": "appId",
+    "display": "智慧昆山微信appId",
+    "group": "weixinWiseks",
+    "value": "wx2779ae92c87bcd65"
+  },
+  {
+    "name": "appSecret",
+    "display": "智慧昆山微信appSecret",
+    "group": "weixinWiseks",
+    "value": "183953975d40e83062eeead44662a312"
+  },
+  {
+    "name": "rqIp",
+    "display": "锐桥自行车接口ip",
+    "group": "bike",
+    "value": "58.211.65.178"
+  },
+  {
+    "name": "rqPort",
+    "display": "锐桥自行车接口端口",
+    "group": "bike",
+    "value": "11112"
+  }
+]

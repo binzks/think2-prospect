@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>违章详情</title>
+
+    <link rel="stylesheet" href="../../css/mui.css"/>
+</head>
+<body>
+<!--<header class="mui-bar mui-bar-nav">-->
+<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+<!--<h1 class="mui-title">违章列表</h1>-->
+<!--</header>-->
+<div class="mui-content">
+    <div style="padding: 10px 10px;">
+        <div id="segmentedControl" class="mui-segmented-control">
+            <a class="mui-control-item mui-active" href="#item_no_pay">未缴费</a>
+            <a class="mui-control-item" href="#item_paid">已缴费</a>
+        </div>
+    </div>
+    <div id="item_no_pay" class="mui-control-content mui-card mui-active" style="margin-bottom: 35px;">
+        <ul id="OA_task_no_pay" class="mui-table-view"></ul>
+    </div>
+    <div id="item_paid" class="mui-control-content mui-card" style="margin-bottom: 35px;">
+        <ul id="OA_task_paid" class="mui-table-view"></ul>
+    </div>
+</div>
+<script src="../../js/mui.js"></script>
+<script src="../../js/jquery-3.1.0.min.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/illegal.js"></script>
+<script>
+    mui.init();
+
+    var k = getQueryString("k");
+    var v = getQueryString("v");
+    var t = getQueryString("t");
+    queryIllegal(k, v, t);
+</script>
+</body>
+</html>

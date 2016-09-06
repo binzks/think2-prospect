@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <!--这个输出控制台的配置-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="ALL" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--这个都知道是输出日志的格式-->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </Console>
+        <NoSql name="all_log">
+            <MongoDb databaseName="wiseks_wap_log" collectionName="all_log" server="localhost"
+                     port="27017" username="" password=""/>
+        </NoSql>
+        <NoSql name="exception_log">
+            <MongoDb databaseName="wiseks_wap_log" collectionName="exception_log" server="localhost"
+                     port="27017" username="" password=""/>
+        </NoSql>
+        <NoSql name="database_sql">
+            <MongoDb databaseName="wiseks_wap_log" collectionName="database_sql" server="localhost"
+                     port="27017" username="" password=""/>
+        </NoSql>
+        <NoSql name="access_log">
+            <MongoDb databaseName="wiseks_wap_log" collectionName="access_log" server="localhost"
+                     port="27017" username="" password=""/>
+        </NoSql>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.think2framework.wap.exception.SimpleApiExceptionHandler" level="ALL">
+            <appender-ref ref="exception_log"/>
+        </Logger>
+        <Logger name="org.think2framework.orm.Query" level="ALL">
+            <appender-ref ref="database_sql"/>
+        </Logger>
+        <Logger name="org.think2framework.orm.Writer" level="ALL">
+            <appender-ref ref="database_sql"/>
+        </Logger>
+        <Logger name="org.think2framework.wap.security.Interceptor" level="ALL">
+            <appender-ref ref="access_log"/>
+        </Logger>
+        <Root level="ALL">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="all_log"/>
+        </Root>
+    </Loggers>
+</Configuration>

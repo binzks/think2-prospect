@@ -1,0 +1,15 @@
+[
+  {
+    "name": "wiseksWap",
+    "type": "mysql",
+    "minIdle": 1,
+    "maxIdle": 2,
+    "initialSize": 2,
+    "removeAbandonedTimeout": 300,
+    "database": "think2wiseks",
+    "queryAddress": "localhost:3306",
+    "writerAddress": "localhost:3306",
+    "username": "root",
+    "password": "root"
+  }
+]

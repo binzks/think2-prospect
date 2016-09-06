@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:annotation-config/>
+
+    <bean class="org.think2framework.ide.support.Initialization" init-method="init">
+        <!--数据源名称-->
+        <property name="ds" value="think2wiseks"/>
+        <!--数据库类型 mysql sqlserver oracle sqlite-->
+        <property name="type" value="mysql"/>
+        <!--数据源最小空闲连接-->
+        <property name="minIdle" value="1"/>
+        <!--数据源最大空闲连接-->
+        <property name="maxIdle" value="2"/>
+        <!--数据源初始化连接数-->
+        <property name="initialSize" value="2"/>
+        <!--数据源超时时间(以秒数为单位)-->
+        <property name="removeAbandonedTimeout" value="300"/>
+        <!--数据库名称-->
+        <property name="database" value="think2wiseks"/>
+        <!--读取数据地址-->
+        <property name="queryAddress" value="localhost:3306"/>
+        <!--写入数据地址-->
+        <property name="writerAddress" value="localhost:3306"/>
+        <!--数据库用户名-->
+        <property name="username" value="root"/>
+        <!--数据库密码-->
+        <property name="password" value="root"/>
+    </bean>
+
+    <!-- Controller Service -->
+    <context:component-scan base-package="org.think2framework.ide.controller,org.think2framework.cmf.controller"/>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="org.think2framework.cmf.security.Interceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="exceptionHandler" class="org.think2framework.cmf.exception.SimpleCmfExceptionHandler"/>
+
+</beans>

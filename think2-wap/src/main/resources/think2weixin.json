@@ -1,0 +1,12 @@
+{
+  "cluster": false,
+  "accounts": [
+    {
+      "name": "wiseks",
+      "appId": "wx2779ae92c87bcd65",
+      "appSecret": "183953975d40e83062eeead44662a312",
+      "expiresIn": 7000,
+      "nonce": "Wm3W1YTPz0wz3cnW"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>违章详情</title>
+
+    <link rel="stylesheet" href="../../css/mui.css"/>
+</head>
+<body>
+<!--<header class="mui-bar mui-bar-nav">-->
+    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+    <!--<h1 class="mui-title">违章详情</h1>-->
+<!--</header>-->
+<!--<div class="mui-content">-->
+    <div class="mui-table-view" style="font-size:13px;">
+        <div class="mui-table-view-cell">
+            <div class="mui-table">
+                <div class="mui-table-cell mui-col-xs-3">编号</div>
+                <div id="surveil_file_no" class="mui-table-cell mui-col-xs-9"></div>
+            </div>
+        </div>
+        <div class="mui-table-view-cell">
+            <div class="mui-table">
+                <div class="mui-table-cell mui-col-xs-3">发现机关</div>
+                <div id="violation_processed_by" class="mui-table-cell mui-col-xs-9"></div>
+            </div>
+        </div>
+        <div class="mui-table-view-cell">
+            <div class="mui-table">
+                <div class="mui-table-cell mui-col-xs-3">违法时间</div>
+                <div id="violation_time" class="mui-table-cell mui-col-xs-9"></div>
+            </div>
+        </div>
+        <div class="mui-table-view-cell">
+            <div class="mui-table">
+                <div class="mui-table-cell mui-col-xs-3">违法地点</div>
+                <div id="violation_address" class="mui-table-cell mui-col-xs-9"></div>
+            </div>
+        </div>
+        <div class="mui-table-view-cell">
+            <div class="mui-table">
+                <div class="mui-table-cell mui-col-xs-3">违法行为</div>
+                <div id="violation_act" class="mui-table-cell mui-col-xs-9"></div>
+            </div>
+        </div>
+        <div class="mui-table-view-cell">
+            <div class="mui-table">
+                <img class="mui-col-xs-12" id="violation_pic_url">
+            </div>
+        </div>
+    </div>
+<!--</div>-->
+<script src="../../js/mui.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/jquery-3.1.0.min.js"></script>
+<script src="../../js/illegal.js"></script>
+<script>
+    mui.init();
+    var id = getQueryString("id");
+    var t = getQueryString("t");
+    queryDetail(id, t);
+</script>
+</body>
+</html>

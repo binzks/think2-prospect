@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>违章查询</title>
+
+    <link rel="stylesheet" href="../../css/mui.css"/>
+</head>
+<body>
+<!--<header class="mui-bar mui-bar-nav">-->
+<!--<h1 class="mui-title">违章查询</h1>-->
+<!--</header>-->
+<nav class="mui-bar mui-bar-tab mui-text-center">
+    <span class="mui-h4">咨询热线:96122</span><br>
+    <span class="mui-h5">信息来源于昆山市公安局交巡警大队</span>
+</nav>
+<div class="mui-content">
+    <!--<div style="padding: 10px 10px;">-->
+    <!--<div id="segmentedControl" class="mui-segmented-control">-->
+    <!--<a class="mui-control-item mui-active" href="#item_vehicle">车辆违章</a>-->
+    <!--<a class="mui-control-item" href="#item_driving">驾驶证违章</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div id="item_vehicle" class="mui-control-content mui-active">
+        <div class="mui-content-padded" style="margin: 5px;">
+            <form class="mui-input-group">
+                <div class="mui-input-row">
+                    <label>车牌号码</label>
+                    <div style="white-space: nowrap;margin: 0px">
+                        苏E<input id="vehicle_key" type="text" class="mui-input-clear" placeholder="请输入车牌号码">
+                    </div>
+                </div>
+                <div class="mui-input-row">
+                    <label>车架号码</label>
+                    <input type="text" id="vehicle_value" class="mui-input-clear" placeholder="请输入车架号后7位">
+                </div>
+            </form>
+            <div class="mui-input mui-text-center" style="margin: 10px">
+                <span style="color: red;">注: 请正确填写并核实,避免查询有误。</span>
+            </div>
+            <div class="mui-button-row">
+                <button id="btnQueryVehicle" type="button" class="mui-btn mui-btn-blue mui-col-xs-10"
+                        onclick="queryVehicle(uId);">查询
+                </button>
+            </div>
+            <div id="waiting" class="mui-button-row"
+                 style="display:none;position: absolute;top: 0%;left: 0%;width: 100%; height: 100%;z-index:1001; -moz-opacity: 0.8;opacity:.80;">
+                <span class="mui-spinner" style="height: 45px;width: 45px; margin-top: 150px;"></span>
+            </div>
+            <div class="mui-input">&nbsp;</div>
+            <ul id="OA_task_vehicle" class="mui-table-view"></ul>
+        </div>
+    </div>
+    <!--<div id="item_driving" class="mui-control-content">-->
+    <!--<div class="mui-text-center">敬请期待^ ^</div>-->
+    <!--&lt;!&ndash;<div class="mui-content-padded" style="margin: 5px;">&ndash;&gt;-->
+    <!--&lt;!&ndash;<form class="mui-input-group">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="mui-input-row">&ndash;&gt;-->
+    <!--&lt;!&ndash;<label>档案编号</label>&ndash;&gt;-->
+    <!--&lt;!&ndash;<input type="text" id="driving_key" class="mui-input-clear" placeholder="请输入档案编号">&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="mui-input-row">&ndash;&gt;-->
+    <!--&lt;!&ndash;<label>驾驶证号</label>&ndash;&gt;-->
+    <!--&lt;!&ndash;<input type="text" id="driving_value" class="mui-input-clear" placeholder="请输入驾驶证号">&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</form>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="mui-input mui-text-center" style="margin: 10px">&ndash;&gt;-->
+    <!--&lt;!&ndash;<span style="color: red;">注: 请正确填写并核实,避免查询有误。</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="mui-button-row">&ndash;&gt;-->
+    <!--&lt;!&ndash;<button type="button" class="mui-btn mui-btn-blue mui-col-xs-10" onclick="queryDriving();">查询</button>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="mui-input">&nbsp;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<ul id="OA_task_driving" class="mui-table-view"></ul>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+</div>
+<script src="../../js/mui.js"></script>
+<script src="../../js/jquery-3.1.0.min.js"></script>
+<script src="../../js/illegal.js"></script>
+<script src="../../js/common.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+    var uId = "";
+
+    mui.init();
+    (function ($) {
+        $('#OA_task_vehicle').on('tap', '.mui-btn', function (event) {
+            var elem = this;
+            var li = elem.parentNode.parentNode;
+            mui.confirm('确认删除该车辆？', '', btnArray, function (e) {
+                if (e.index == 0) {
+                    removeBinding(uId, li.id, li.getAttribute("name"), "1");
+                    li.parentNode.removeChild(li);
+                } else {
+                    setTimeout(function () {
+                        $.swipeoutClose(li);
+                    }, 0);
+                }
+            });
+        });
+        var btnArray = ['确认', '取消'];
+        $('#OA_task_driving').on('tap', '.mui-btn', function (event) {
+            var elem = this;
+            var li = elem.parentNode.parentNode;
+            mui.confirm('确认删除该驾驶证？', '', btnArray, function (e) {
+                if (e.index == 0) {
+                    removeBinding(uId, li.id, li.getAttribute("name"), "2");
+                    li.parentNode.removeChild(li);
+                } else {
+                    setTimeout(function () {
+                        $.swipeoutClose(li);
+                    }, 0);
+                }
+            });
+        });
+    })(mui);
+
+    loadBinding(uId);
+</script>
+</body>
+</html>
